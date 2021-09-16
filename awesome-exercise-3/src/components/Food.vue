@@ -42,7 +42,10 @@
 
     <q-dialog 
     	v-model="showEditFoodModal">
-      <modal-add-edit-food type="edit" />
+      <modal-add-edit-food 
+      	:food="food"
+      	@close="showEditFoodModal=false"
+      	type="edit" />
     </q-dialog>
   </q-card>
 </template>

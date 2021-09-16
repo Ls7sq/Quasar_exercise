@@ -77,7 +77,7 @@
 <script>
 	import {mapActions} from 'vuex'
 	export default {
-		props: ['type'],
+		props: ['type','food'],
 		data() {
 			return {
 				foodToSubmit: {
@@ -89,7 +89,7 @@
 			}
 		},
 		methods:{
-			...mapActions('foods',['addFood']),
+			...mapActions('foods',['addFood','updateFood']),
 			submitForm(){
 				this.$refs.name.validate()
 				this.$refs.description.validate()
@@ -103,9 +103,13 @@
 					this.addFood(this.foodToSubmit)
 
 				}else{
-					console.log('update food')
+					this.updateFood(this.foodToSubmit)
 				}
 			}
+		},
+		mounted(){
+			this.foodToSubmit = Object.assign({},this.food) 
+			
 		}
 	}
 </script>

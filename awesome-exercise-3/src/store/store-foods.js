@@ -35,6 +35,10 @@ const mutations = {
 	},
 	addFood(state, food){
 		state.foods.push(food)
+	},
+	updateFood(state, food){
+		let index = state.foods.findIndex(stateFood => stateFood.id == food.id)
+		Vue.set(state.foods, index, food)	
 	}
 }
 
@@ -47,6 +51,9 @@ const actions = {
 		let newId = uid()
 		food.id = newId
 		commit('addFood', food)
+	},
+	updateFood({commit}, food){
+		commit('updateFood', food)
 	}
 }
 
