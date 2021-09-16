@@ -2,7 +2,7 @@
 	<q-card 
 		class="card">
     <q-img
-      :src="food.imageUrl"
+      :src="food.imageUrl? food.imageUrl:'statics/image-placeholder.png'"
       basic
       contain
     >
