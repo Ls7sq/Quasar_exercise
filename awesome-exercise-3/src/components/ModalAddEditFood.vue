@@ -11,7 +11,13 @@
 	      	filled
 	      	v-model="foodToSubmit.name"
 	      	label="Name (e.g. Burger)"
-	      	class="col" />
+	      	class="col" 
+	      	ref="name"
+	      	:rules="[
+	      		val => !!val || 'Field is required',
+	      		val => val.length <= 20 || 'Please use maximum 20 characters'
+	      		]"
+	      	/>
     	</div>
 
     	<div class="row q-mb-md">
@@ -20,7 +26,12 @@
 		      v-model="foodToSubmit.description"
 		      label="Description"
 		      type="textarea"
-		      class="col" />
+		      class="col"
+		      ref="description" 
+		      :rules="[
+	      		val => val.length <= 135 || 'Please use maximum 135 characters'
+	      		]"
+/>
     	</div>
 
     	<div class="row q-mb-md">
@@ -55,9 +66,10 @@
       	color="grey"
       	v-close-popup />
       <q-btn
+      	@click="submitForm"
       	label="Save"
       	color="primary"
-      	v-close-popup />
+      />
     </q-card-actions>
   </q-card>
 </template>
@@ -72,6 +84,15 @@
 					description: '',
 					rating: 1,
 					imageUrl: ''
+				}
+			}
+		},
+		methods:{
+			submitForm(){
+				this.$refs.name.validate()
+				this.$refs.description.validate()
+				if (!this.$refs.name.hasError && !this.$refs.description.hasError) {
+					console.log('cansave')
 				}
 			}
 		}

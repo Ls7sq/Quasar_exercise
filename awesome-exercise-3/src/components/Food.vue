@@ -34,6 +34,7 @@
       	color="blue"
       	flat>Edit</q-btn>
       <q-btn
+      	@click="promptToDelete"
       	icon="delete"
       	color="red"
       	flat>Delete</q-btn>
@@ -47,11 +48,27 @@
 </template>
 
 <script>
+	import {Dialog} from 'quasar'
+	import {mapActions} from 'vuex'
+
 	export default {
 		props: ['food'],
 		data() {
 			return {
 				showEditFoodModal: false
+			}
+		},
+		methods:{
+			...mapActions('foods',['deleteFood']),
+
+			promptToDelete(){
+				Dialog.create({
+	        title: 'Confirm',
+	        message: 'Really Delete?',
+	        persistent: true
+	      }).onOk(() => {
+	        this.deleteFood(this.food.id)
+	      })
 			}
 		},
 		components: {
