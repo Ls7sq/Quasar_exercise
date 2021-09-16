@@ -22,7 +22,8 @@
     </q-card-section>
 
     <q-card-section>
-      {{ food.description }}
+      <span v-if="food.description">{{ food.description }}</span>
+      <i v-else>No description provided</i>
     </q-card-section>
 
     <q-card-actions
