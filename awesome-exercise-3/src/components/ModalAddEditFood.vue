@@ -75,6 +75,7 @@
 </template>
 
 <script>
+	import {mapActions} from 'vuex'
 	export default {
 		props: ['type'],
 		data() {
@@ -88,11 +89,21 @@
 			}
 		},
 		methods:{
+			...mapActions('foods',['addFood']),
 			submitForm(){
 				this.$refs.name.validate()
 				this.$refs.description.validate()
 				if (!this.$refs.name.hasError && !this.$refs.description.hasError) {
-					console.log('cansave')
+					this.$emit('close')
+					this.submitFood()
+				}
+			},
+			submitFood(){
+				if (this.type == 'add') {
+					this.addFood(this.foodToSubmit)
+
+				}else{
+					console.log('update food')
 				}
 			}
 		}

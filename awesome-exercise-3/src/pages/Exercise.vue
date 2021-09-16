@@ -25,7 +25,9 @@
 
 	    <q-dialog 
 	    	v-model="showAddFoodModal">
-        <modal-add-edit-food type="add" />
+        <modal-add-edit-food 
+        	@close='showAddFoodModal = false'
+        	type="add" />
       </q-dialog>
     
   	</div>

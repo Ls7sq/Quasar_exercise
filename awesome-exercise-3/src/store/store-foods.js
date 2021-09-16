@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import {uid} from 'quasar'
 const state = {
 	foods: [
 		{
@@ -32,7 +32,9 @@ const mutations = {
 		console.log('id: ', id)
 		console.log('index: ', parseInt(index))
 		Vue.delete(state.foods, index)
-
+	},
+	addFood(state, food){
+		state.foods.push(food)
 	}
 }
 
@@ -40,6 +42,11 @@ const actions = {
 	deleteFood({commit}, id){
 		console.log('deletefood: ', id)
 		commit('deleteFood', id)
+	},
+	addFood({commit}, food){
+		let newId = uid()
+		food.id = newId
+		commit('addFood', food)
 	}
 }
 
