@@ -44,6 +44,7 @@ const actions = {
 				dispatch('foods/fbReadData', null, {root:true})
 			}else{
 				commit('setLoggedIn', false)
+				commit('foods/clearFoods', null, {root:true})
 				LocalStorage.set('loggedIn',false)
 				this.$router.replace('/auth')
 			}

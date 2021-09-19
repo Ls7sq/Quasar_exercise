@@ -34,6 +34,9 @@ const mutations = {
 	},
 	updateFood(state, payload) {
 		Object.assign(state.foods[payload.id], payload.updates)
+	},
+	clearFoods(state){
+		state.foods = {}
 	}
 }
 
