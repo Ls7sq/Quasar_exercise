@@ -1,5 +1,5 @@
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
-import { LocalStorage } from 'quasar'
+import { LocalStorage, Notify } from 'quasar'
 
 const state = {
 	loggedIn: false
@@ -19,7 +19,7 @@ const actions = {
 			console.log('register details: ' ,response)
 		})
 		.catch(error=>{
-			console.log('error: ' ,error.message)
+			Notify.create(error.message)
 		})
 	},
 	loginUser({}, payload){
@@ -29,7 +29,7 @@ const actions = {
 			console.log('register details: ' ,response)
 		})
 		.catch(error=>{
-			console.log('error: ' ,error.message)
+			Notify.create(error.message)
 		})
 	},
 	logoutUser(){

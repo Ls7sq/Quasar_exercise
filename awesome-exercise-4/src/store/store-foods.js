@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { uid } from 'quasar'
+import { uid, Notify } from 'quasar'
 import { firebaseAuth, firebaseDb} from 'boot/firebase'
 
 const state = {
@@ -69,7 +69,7 @@ const actions = {
 			}
 			commit('addFood', payload)
 		},error=>{
-			console.log('error message', error.message)
+			Notify.create(error.message)
 		})
 
 		foodsRef.on('child_changed', snapshot=>{
@@ -93,7 +93,7 @@ const actions = {
 		let foodsRef = firebaseDb.ref('foods/' + userId + '/' + payload.id)
 		foodsRef.set(payload.food)
 			.catch(error=>{
-				console.log('error message: ',error.message)
+				Notify.create(error.message)
 			})
 	},
 	fbUpdateFood({},payload){
@@ -102,7 +102,7 @@ const actions = {
 		let foodsRef = firebaseDb.ref('foods/' + userId + '/' + payload.id)
 		foodsRef.update(payload.updates)
 			.catch(error=>{
-				console.log('error message: ',error.message)
+				Notify.create(error.message)
 			})
 	},
 	fbDeleteFood({},foodId){
@@ -111,7 +111,7 @@ const actions = {
 		let foodsRef = firebaseDb.ref('foods/' + userId + '/' + foodId)
 		foodsRef.remove()
 			.catch(error=>{
-				console.log('error message: ',error.message)
+				Notify.create(error.message)
 			})
 	},
 }
