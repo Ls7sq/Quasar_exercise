@@ -38,19 +38,19 @@ const mutations = {
 }
 
 const actions = {
-	deleteFood({ commit }, id) {
-		commit('deleteFood', id)
+	deleteFood({ dispatch }, id) {
+		dispatch('fbDeleteFood', id)
 	},
-	addFood({ commit }, food) {
+	addFood({ dispatch }, food) {
 		let newId = uid()
 		let payload = {
 			id: newId,
 			food: food
 		}
-		commit('addFood', payload)
+		dispatch('fbAddFood', payload)
 	},
-	updateFood({ commit }, payload) {
-		commit('updateFood', payload)
+	updateFood({ dispatch }, payload) {
+		dispatch('fbUpdateFood', payload)
 	},
 	fbReadData({ commit }){
 		let userId = firebaseAuth.currentUser.uid
@@ -80,7 +80,34 @@ const actions = {
 			let id = snapshot.key
 			commit('deleteFood', id)
 		})
-	}
+	},
+	fbAddFood({},payload){
+		//console.log(payload)
+		let userId = firebaseAuth.currentUser.uid
+		let foodsRef = firebaseDb.ref('foods/' + userId + '/' + payload.id)
+		foodsRef.set(payload.food)
+			.catch(error=>{
+				console.log('error message: ',error.message)
+			})
+	},
+	fbUpdateFood({},payload){
+		//console.log(payload)
+		let userId = firebaseAuth.currentUser.uid
+		let foodsRef = firebaseDb.ref('foods/' + userId + '/' + payload.id)
+		foodsRef.update(payload.updates)
+			.catch(error=>{
+				console.log('error message: ',error.message)
+			})
+	},
+	fbDeleteFood({},foodId){
+		//console.log(payload)
+		let userId = firebaseAuth.currentUser.uid
+		let foodsRef = firebaseDb.ref('foods/' + userId + '/' + foodId)
+		foodsRef.remove()
+			.catch(error=>{
+				console.log('error message: ',error.message)
+			})
+	},
 }
 
 const getters = {
