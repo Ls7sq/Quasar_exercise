@@ -1,10 +1,13 @@
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
 
 const state = {
-
+	loggedIn: false
 }
 
 const mutations = {
+	setLoggedIn(state, value){
+		state.loggedIn = value
+	}
 }
 
 const actions = {
@@ -26,6 +29,15 @@ const actions = {
 		})
 		.catch(error=>{
 			console.log('error: ' ,error.message)
+		})
+	},
+	handleAuthStateChange({commit}){
+		firebaseAuth.onAuthStateChanged(user=>{
+			if (user) {
+				commit('setLoggedIn', true)
+			}else{
+				commit('setLoggedIn', false)
+			}
 		})
 	}
 }
