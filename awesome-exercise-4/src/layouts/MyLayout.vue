@@ -56,7 +56,10 @@
             <q-icon name="account_circle" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Logout</q-item-label>
+            <q-item-label>
+              Logout
+              <br> <small>{{loggedInEmail}}</small>
+            </q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -84,7 +87,7 @@ export default {
     openURL
   },
   computed:{
-    ...mapState('auth',['loggedIn'])
+    ...mapState('auth',['loggedIn', 'loggedInEmail'])
   }
 }
 </script>

@@ -2,12 +2,16 @@ import { firebaseAuth, firebaseDb } from 'boot/firebase'
 import { LocalStorage, Notify } from 'quasar'
 
 const state = {
-	loggedIn: false
+	loggedIn: false,
+	loggedInEmail: ''
 }
 
 const mutations = {
 	setLoggedIn(state, value){
 		state.loggedIn = value
+	},
+	setLoggedInEmail(state, value){
+		state.loggedInEmail = value
 	}
 }
 
@@ -39,10 +43,12 @@ const actions = {
 		firebaseAuth.onAuthStateChanged(user=>{
 			if (user) {
 				commit('setLoggedIn', true)
+				commit('setLoggedInEmail', user.email)
 				LocalStorage.set('loggedIn',true)
 				this.$router.push('/')
 				dispatch('foods/fbReadData', null, {root:true})
 			}else{
+				commit('setLoggedInEmail', '')
 				commit('setLoggedIn', false)
 				commit('foods/clearFoods', null, {root:true})
 				LocalStorage.set('loggedIn',false)
