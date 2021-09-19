@@ -48,6 +48,17 @@
             <q-item-label>Login</q-item-label>
           </q-item-section>
         </q-item>
+        <q-item 
+          clickable
+          @click="logoutUser"
+          v-else>
+          <q-item-section avatar>
+            <q-icon name="account_circle" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Logout</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -59,7 +70,7 @@
 
 <script>
 import { openURL } from 'quasar'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MyLayout',
   data () {
@@ -68,6 +79,8 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth',['logoutUser']),
+
     openURL
   },
   computed:{
