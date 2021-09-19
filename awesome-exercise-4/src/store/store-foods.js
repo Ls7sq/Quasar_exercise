@@ -57,6 +57,7 @@ const actions = {
 	},
 	fbReadData({ commit }){
 		let userId = firebaseAuth.currentUser.uid
+		//userId="J3G8AA3KWJZ3oiu1kfuZzoC3zpE2"
 		let foodsRef = firebaseDb.ref('foods/' + userId)
 		
 		foodsRef.on('child_added', snapshot=>{
@@ -67,6 +68,8 @@ const actions = {
 				food: food
 			}
 			commit('addFood', payload)
+		},error=>{
+			console.log('error message', error.message)
 		})
 
 		foodsRef.on('child_changed', snapshot=>{
