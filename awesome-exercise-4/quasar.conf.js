@@ -5,7 +5,8 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'firebase'
+      'firebase',
+      'router-auth'
     ],
 
     css: [
@@ -64,7 +65,8 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Dialog'
+        'Dialog',
+        'LocalStorage'
       ]
 
       // iconSet: 'ionicons-v4'
