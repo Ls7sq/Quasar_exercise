@@ -57,7 +57,7 @@
 			}
 		},
 		methods: {
-			...mapActions('auth',['registerUser']),
+			...mapActions('auth',['registerUser','loginUser']),
 
 			isValidEmailAddress(email) {
 				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -68,7 +68,7 @@
 				this.$refs.password.validate()
 				if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
 					if (this.tab == 'login') {
-						// login the user here
+						this.loginUser(this.formData)
 					}
 					else {
 						this.registerUser(this.formData)
